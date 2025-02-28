@@ -9,6 +9,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && apt-get install nodejs -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# set /home/jenkins/.npm-global as global npm directory with sufficient access from jenkins user
+RUN mkdir /home/jenkins/.npm-global &&\
+	chmod 777 /home/jenkins/.npm-global &&\
+	npm config set prefix '/home/jenkins/.npm-global' &&\
+	export PATH=/home/jenkins/.npm-global/bin:$PATH
+
+
 # Set SHELL flags for RUN commands to allow -e and pipefail
 # Rationale:https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
