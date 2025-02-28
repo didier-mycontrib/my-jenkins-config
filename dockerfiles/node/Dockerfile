@@ -46,4 +46,5 @@ COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
 
 #NB: xvfb is a required dependency of cypress
-RUN apt-get update && apt-get install -y xvfb && npm install -g typescript && npm install -g http-server && npm install -g cypress && npm install -g start-server-and-test
+RUN apt-get update && apt-get install -y xvfb && npm install -g typescript && npm install -g http-server && npm install -g start-server-and-test
+RUN npx cypress install # Install Cypress binary into image
