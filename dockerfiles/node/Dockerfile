@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 
 # set /home/jenkins/.npm-global as global npm directory with sufficient access from jenkins user
 RUN mkdir /home/jenkins/.npm-global &&\
-	chmod 777 /home/jenkins/.npm-global
+	chmod 777 /home/jenkins/.npm-global  &&\
+    echo 'prefix=~/.npm-global' > /home/jenkins/.npmrc &&\
+	echo 'export PATH=/home/jenkins/.npm-global/bin:$PATH' >> /home/jenkins/.profile
 
 # Set SHELL flags for RUN commands to allow -e and pipefail
 # Rationale:https://github.com/hadolint/hadolint/wiki/DL4006
