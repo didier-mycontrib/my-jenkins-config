@@ -7,7 +7,7 @@ ARG NODE_MAJOR=22
 SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
 # Create a script file sourced by both interactive and non-interactive bash shells
-ENV BASH_ENV /home/user/.bash_env
+ENV BASH_ENV /home/jenkins/.bash_env
 RUN touch "${BASH_ENV}"
 RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
 
