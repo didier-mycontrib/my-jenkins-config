@@ -11,10 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 
 # set /home/jenkins/.npm-global as global npm directory with sufficient access from jenkins user
 RUN mkdir /home/jenkins/.npm-global &&\
-	chmod 777 /home/jenkins/.npm-global &&\
-	npm config set prefix '/home/jenkins/.npm-global' &&\
-	export PATH=/home/jenkins/.npm-global/bin:$PATH
-
+	chmod 777 /home/jenkins/.npm-global
 
 # Set SHELL flags for RUN commands to allow -e and pipefail
 # Rationale:https://github.com/hadolint/hadolint/wiki/DL4006
@@ -35,10 +32,12 @@ RUN install -m 0755 -d /etc/apt/keyrings &&\
 
 #gives jenkins user permissions to access /var/run/docker.sock
 #via setfacl --modify user:jenkins:rw /var/run/docker.sock
-#in init_docker_access.sh
-COPY init_docker_access.sh init_docker_access.sh
+#	npm config set prefix '/home/jenkins/.npm-global'
+#	export PATH=/home/jenkins/.npm-global/bin:$PATH
+#	in init_jenkins_access.sh
+COPY init_jenkins_access.sh init_jenkins_access.sh
 
 # override entrypoint of inherited jenkins/ssh-agent:6.9.0 
-# my_entrypoint.sh = call init_docker_access.sh and call setup-sshd
+# my_entrypoint.sh = call init_jenkijns_access.sh and call setup-sshd
 COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
