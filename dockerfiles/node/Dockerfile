@@ -62,6 +62,6 @@ RUN apt-get update && \
   libxtst6 \
   procps \
   xauth \
-  xvfb \
+  xvfb
   
 RUN npx cypress install # Install Cypress binary into image
