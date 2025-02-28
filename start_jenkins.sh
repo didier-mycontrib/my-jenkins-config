@@ -1,2 +1,2 @@
-#sudo docker compose --profile python up -d
-docker compose --profile python up -d
+#[sudo] docker compose --profile python up -d
+docker compose --profile node up -d

@@ -62,6 +62,7 @@ services:
   default_agent:
     image: jenkins/ssh-agent:6.9.0
     container_name: desktop-jenkins_agent-1
+    restart: unless-stopped
     profiles:
       - default
     depends_on:
@@ -80,6 +81,7 @@ services:
   maven:
     build: dockerfiles/maven/.
     container_name: desktop-jenkins_agent-1-maven
+    restart: unless-stopped
     profiles:
       - maven
     depends_on:
@@ -98,6 +100,7 @@ services:
   python:
     build: dockerfiles/python/.
     container_name: desktop-jenkins_agent-1-python
+    restart: unless-stopped
     #privileged: true
     profiles:
       - python
@@ -120,6 +123,7 @@ services:
     environment:
       - GITPOD_WORKSPACE_URL=${GITPOD_WORKSPACE_URL}
     container_name: desktop-jenkins_agent-1-node
+    restart: unless-stopped
     profiles:
       - node
     depends_on:
