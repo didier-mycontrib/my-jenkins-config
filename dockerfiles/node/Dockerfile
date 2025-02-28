@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 RUN mkdir /home/jenkins/.npm-global &&\
 	chmod 777 /home/jenkins/.npm-global  &&\
     echo 'prefix=~/.npm-global' > /home/jenkins/.npmrc &&\
-	echo 'export PATH=/home/jenkins/.npm-global/bin:$PATH' >> /home/jenkins/.profile
+	echo 'export PATH=/home/jenkins/.npm-global/bin:$PATH' >> /home/jenkins/.profile &&\
+	echo 'export PATH=/home/jenkins/.npm-global/bin:$PATH' >> /home/jenkins/.bashrc
 
 # Set SHELL flags for RUN commands to allow -e and pipefail
 # Rationale:https://github.com/hadolint/hadolint/wiki/DL4006
@@ -43,3 +44,6 @@ COPY init_jenkins_access.sh init_jenkins_access.sh
 # my_entrypoint.sh = call init_jenkijns_access.sh and call setup-sshd
 COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
+
+USER jenkins
+RUN . /home/jenkins/.profile && npm install -g lite-server && npm install -g cypress

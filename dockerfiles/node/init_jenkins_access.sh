@@ -2,4 +2,4 @@
 setfacl --modify user:jenkins:rw /var/run/docker.sock
 
 #source .profile
-. /home/jenkins/.profile
+#NB: . /home/jenkins/.profile should be invoke from jenkins user
