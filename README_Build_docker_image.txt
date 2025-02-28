@@ -13,4 +13,5 @@ dans entrypoint
      
 --------------
 Rappel : pour debug de container :  docker container exec -ti xyz_container sh
+exemple: docker container exec -ti desktop-jenkins_agent-1-node sh
 

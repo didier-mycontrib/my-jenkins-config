@@ -45,4 +45,4 @@ COPY init_jenkins_access.sh init_jenkins_access.sh
 COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
 
-RUN npm install -g typescript && npm install -g lite-server && npm install -g cypress
+RUN npm install -g typescript && npm install -g http-server && npm install -g cypress && npm install -g start-server-and-test
