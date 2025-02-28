@@ -23,15 +23,15 @@ SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 RUN echo "PATH=${PATH}" >> /etc/environment && chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
 
 #install docker-ce on this agent in order to build and push image from jenkins
-RUN install -m 0755 -d /etc/apt/keyrings &&\
-	curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc &&\
-	chmod a+r /etc/apt/keyrings/docker.asc &&\
-	echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  tee /etc/apt/sources.list.d/docker.list > /dev/null &&\
-  apt-get update &&\
-  apt-get install -y --no-install-recommends acl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+#RUN install -m 0755 -d /etc/apt/keyrings &&\
+#	curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc &&\
+#	chmod a+r /etc/apt/keyrings/docker.asc &&\
+#	echo \
+#  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+#  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+#  tee /etc/apt/sources.list.d/docker.list > /dev/null &&\
+#  apt-get update &&\
+#  apt-get install -y --no-install-recommends acl docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 #gives jenkins user permissions to access /var/run/docker.sock
 #via setfacl --modify user:jenkins:rw /var/run/docker.sock
@@ -45,5 +45,6 @@ COPY init_jenkins_access.sh init_jenkins_access.sh
 COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
 
-USER jenkins
-RUN . /home/jenkins/.profile && npm install -g lite-server && npm install -g cypress
+#USER jenkins
+#RUN . /home/jenkins/.profile && npm install -g lite-server && npm install -g cypress
+RUN npm install -g lite-server
