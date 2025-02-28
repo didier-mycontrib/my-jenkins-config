@@ -61,5 +61,9 @@ RUN apt-get update && \
   xauth \
   xvfb
   
+#switch to jenkins user for cypress install (.cache/Cypress) at goog place:  
 USER jenkins  
 RUN npx cypress install # Install Cypress binary into image
+
+#switch to root user for good behavior of jenkins agent
+USER root
