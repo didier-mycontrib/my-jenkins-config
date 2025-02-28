@@ -45,4 +45,5 @@ COPY init_jenkins_access.sh init_jenkins_access.sh
 COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
 
-RUN npm install -g typescript && npm install -g http-server && npm install -g cypress && npm install -g start-server-and-test
+#NB: xvfb is a required dependency of cypress
+RUN apt-get update && apt-get install -y xvfb && npm install -g typescript && npm install -g http-server && npm install -g cypress && npm install -g start-server-and-test
