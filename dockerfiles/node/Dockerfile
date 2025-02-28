@@ -14,7 +14,7 @@ RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
 # Download and install nvm
 RUN apt-get update && apt-get install -y curl && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | PROFILE="${BASH_ENV}" bash
 RUN echo node > .nvmrc
-RUN nvm install
+#RUN nvm install
 
 
 RUN echo "PATH=${PATH}" >> /etc/environment && chown -R jenkins:jenkins "${JENKINS_AGENT_HOME}"
@@ -41,4 +41,4 @@ COPY my_entrypoint.sh my_entrypoint.sh
 ENTRYPOINT ["sh" ,"my_entrypoint.sh"]
 
 USER jenkins
-RUN npm install -g npm && npm install -g cypress && npm install lite-server
+#RUN npm install -g npm && npm install -g cypress && npm install lite-server
