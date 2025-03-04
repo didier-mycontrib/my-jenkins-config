@@ -17,15 +17,39 @@ jenkins:
       excludeClientIPFromCrumb: false
   nodes:  
   - permanent:
-      labelString: "docker jenkins agent"
+      labelString: "docker jenkins agent node"
       launcher:
         ssh:
           credentialsId: "jenkins-ssh-agent-private-key"
-          host: "desktop-jenkins_agent-1"
+          host: "desktop-jenkins_agent-1-node"
           port: 22
           sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
-      name: "docker-ssh-jenkins-agent"
-      nodeDescription: "ssh jenkins docker agent "
+      name: "docker-ssh-jenkins-agent-node"
+      nodeDescription: "ssh jenkins docker agent node"
+      remoteFS: "/home/jenkins/agent"
+      retentionStrategy: "always"
+  - permanent:
+      labelString: "docker jenkins agent maven"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-ssh-agent-private-key"
+          host: "desktop-jenkins_agent-1-maven"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "docker-ssh-jenkins-agent-maven"
+      nodeDescription: "ssh jenkins docker agent maven "
+      remoteFS: "/home/jenkins/agent"
+      retentionStrategy: "always"
+  - permanent:
+      labelString: "docker jenkins agent python"
+      launcher:
+        ssh:
+          credentialsId: "jenkins-ssh-agent-private-key"
+          host: "desktop-jenkins_agent-1-python"
+          port: 22
+          sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+      name: "docker-ssh-jenkins-agent-python"
+      nodeDescription: "ssh jenkins docker agent python"
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
 credentials:
@@ -42,4 +66,4 @@ credentials:
           username: "jenkins"
 unclassified:
   location:
-    url: "http://127.0.0.1:8080/"
+    url: "http://127.0.0.1:8080/jenkins/"
