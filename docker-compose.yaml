@@ -96,6 +96,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - agent-ssh-dir:/home/jenkins/.ssh:ro # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
   python:
     build: dockerfiles/python/.
@@ -140,6 +141,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - agent-ssh-dir:/home/jenkins/.ssh:ro # Mounts the agent-ssh-dir volume to the /home/jenkins/.ssh path inside the container as read-only
 volumes:
   jenkins_home: null
