@@ -17,7 +17,7 @@ jenkins:
       excludeClientIPFromCrumb: false
   nodes:  
   - permanent:
-      labelString: "docker jenkins agent node"
+      labelString: "docker node node22 javascript without-maven without-python"
       launcher:
         ssh:
           credentialsId: "jenkins-ssh-agent-private-key"
@@ -29,7 +29,7 @@ jenkins:
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
   - permanent:
-      labelString: "docker jenkins agent maven"
+      labelString: "docker maven java jdk21 without-node without-python"
       launcher:
         ssh:
           credentialsId: "jenkins-ssh-agent-private-key"
@@ -41,7 +41,7 @@ jenkins:
       remoteFS: "/home/jenkins/agent"
       retentionStrategy: "always"
   - permanent:
-      labelString: "docker jenkins agent python"
+      labelString: "docker python python3 without-maven without-node"
       launcher:
         ssh:
           credentialsId: "jenkins-ssh-agent-private-key"
